@@ -99,13 +99,13 @@ exports.addProducts = (req, res, next) => {
 
 exports.getSingleProducts = (req, res, next) => {
   // getting the id here
-  const ID = req.params.productID;
+  const ID = req.params.productId;
 
   Product.findById(ID)
     .select('_id name price productImage')
     .exec()
     .then(doc => {
-      res.render('../views/pages/products', {
+      res.render('pages/products', {
         singleRes: doc
       });
 
