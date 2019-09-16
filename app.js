@@ -81,23 +81,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 
-// use res.render to load up an ejs view file
-
-// index page 
-app.get('/', (req, res) => {
-
-});
-
-// about page 
-app.get('/about', (req, res) => {
-
-});
-
-
-
-
-
-
 
 
 

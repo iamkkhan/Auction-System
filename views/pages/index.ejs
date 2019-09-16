@@ -1,43 +1,59 @@
 <!-- views/pages/index.ejs -->
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
     <% include ../partials/head %>
 </head>
 
-<body class="container-fluid">
+<body>
+    <div class="container mt-5">
+        <button class="btn btn-danger"><a href="/addProducts" class="text-white">Add Products</a></button>
+        <div class="row">
 
-    <header>
-        <% include ../partials/header %>
-    </header>
 
-    <main>
-        <div class="jumbotron">
-            <h1>This is great</h1>
-            <p>Welcome to templating using EJS</p>
-            <h2>Variable</h2>
-            <p>
-                <%= tagline %>
-            </p>
+            <% res.forEach(function(docs) { %>
+                <div class="card col-lg-3 col-md-3 col-sm-6">
+                    <img src="./<%=docs.productImage%>" class=" card-img-top " alt="... ">
+                    <div class="card-body ">
+                        <h5 class="card-title ">Product</h5>
+                        <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                    <ul class="list-group list-group-flush ">
+                        <li class="list-group-item ">
+                            <%= docs.name %>
+                        </li>
+                        <li class="list-group-item ">
+                            <%= docs._id %>
+                        </li>
+                        <li class="list-group-item ">
+                            <%= docs.price %>
+                        </li>
+                    </ul>
+                    <div class="card-body ">
+                        <button class="btn btn-success">
+                                <a href="/products/<%=docs._id%>" class="text-white">More Info</a>
+                            </button>
+                    </div>
+                </div>
 
-            <h2>Loop</h2>
+                <% }); %>
 
-            <ul>
-                <% drinks.forEach(function(drink) { %>
-                    <li>
-                        <%= drink.name %>
-                    </li>
-                    <% }); %>
-            </ul>
         </div>
-    </main>
+    </div>
+
+
+
 
     <footer>
         <% include ../partials/footer %>
     </footer>
 
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
 </body>
 
 </html>

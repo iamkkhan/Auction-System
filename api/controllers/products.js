@@ -26,6 +26,15 @@ exports.getAllProducts = (req, res, next) => {
                 })
 
             }
+
+            res.render("../views/pages/index", {
+                    res: doc
+                })
+                // dek yahn index render ki tou /products p uthaya usne
+                // age me index kru tou nh utha rha ha
+                // ap dekh addproduct tou me dalrha hu button p usme bh yehi same error derha ha na mean ye k route ka bhand ha
+
+
             res.status(200).json(response);
         } else {
             res.status(404).json({
@@ -53,6 +62,8 @@ exports.getAllProducts = (req, res, next) => {
 
 exports.addProducts = (req, res, next) => {
     console.log(req.file);
+    console.log(req.local)
+
 
 
     // creating the instant here
@@ -60,9 +71,21 @@ exports.addProducts = (req, res, next) => {
         _id: new mongoose.Types.ObjectId(),
         name: req.body.name,
         price: req.body.price,
+        discription: req.body.discription,
         productImage: req.file.path
 
     });
+
+    Product.create(products, (err, newProd) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.render('/');
+            console.log('Hello')
+
+        }
+    })
+
 
 
     // saving into the DB here
@@ -78,6 +101,7 @@ exports.addProducts = (req, res, next) => {
                 request: {
                     type: 'POST',
                     url: `http://localhost:9000/products/${result._id}`
+
                 }
 
 
@@ -92,11 +116,16 @@ exports.addProducts = (req, res, next) => {
 }
 
 
+
+
 exports.getSingleProducts = (req, res, next) => {
     // getting the id here
     const ID = req.params.productID;
 
     Product.findById(ID).select('_id name price productImage').exec().then(doc => {
+        res.render("../views/pages/products", {
+            singleRes: doc
+        })
 
         res.status(200).json({
             product: doc,
