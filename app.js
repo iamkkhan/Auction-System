@@ -18,7 +18,6 @@ const path = require('path');
 // importing the routes
 // managing all the route here
 const products = require('./api/routes/products');
-const orders = require('./api/routes/orders');
 const users = require('./api/routes/users');
 
 
@@ -71,7 +70,6 @@ app.use((req, res, next) => {
 
 // using the method here for the all the route and handle all the ROUTES here
 app.use('/products', products);
-app.use('/orders', orders);
 app.use('/users', users);
 
 
