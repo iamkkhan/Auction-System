@@ -1,0 +1,52 @@
+<!-- views/pages/index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <%= typeof msg!= 'undefined' ? msg : '' %>
+            <div class="row align-center">
+                <form method="POST" action="/productEdit/<%=prod._id%>" enctype="multipart/form-data">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputName">Name</label>
+                            <input type="text" value="<%=prod.name%>" class="form-control" placeholder="Name" name="Name" required='required' />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputDiscriptiom">Description</label>
+                            <input type="text" value="<%=prod.description%>" class="form-control" placeholder="Description" name="Description" required='required' />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPrice">Price</label>
+                        <input type="text" value="<%=prod.price%>" class="form-control" placeholder="Price" name="Price" required='required' />
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Selected File => <%=prod.productImage %></label>
+                        <input type="file" class="form-control-file" name="File" required='required' />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button class="btn btn-success col-md-4">
+                            <a href="/" class="text-white">Back To Page</a>
+                        </button>
+                </form>
+            </div>
+    </div>
+
+    <footer>
+        <% include ../partials/footer %>
+
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
+</body>
+
+</html>

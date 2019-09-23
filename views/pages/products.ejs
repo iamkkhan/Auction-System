@@ -14,27 +14,129 @@
                 <img src="/<%=singleRes.productImage%>" class=" card-img-top " alt="... ">
                 <div class="card-body ">
                     <h5 class="card-title ">Single Product</h5>
-                    <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+
                 </div>
                 <ul class="list-group list-group-flush ">
+
                     <li class="list-group-item ">
-                        <%= singleRes.productImage %>
+                        <%= singleRes.name %>
                     </li>
                     <li class="list-group-item ">
-                        <%= singleRes._id %>
+                        <%= singleRes.description %>
                     </li>
                     <li class="list-group-item ">
                         <%= singleRes.price %>
                     </li>
                 </ul>
-                <div class="card-body ">
-                    <button class="btn btn-success">
+                <div class="card-body row ">
+                    <button class="btn btn-success col-md-4">
                             <a href="/" class="text-white">Back To Page</a>
+                        </button>
+                    <button class="btn btn-info col-md-4">
+                                <a href="/products/edit-product/<%=singleRes._id%>" class="text-white">Edit</a>
+    
+                        </button>
+                    <button class="btn btn-danger col-md-4">
+                                <a href="/products/delete-product/<%=singleRes._id%>" class="text-white">Delete</a>
+
                         </button>
                 </div>
             </div>
 
+            <div class="col-md-12 col-lg-12 col-sm-12 mt-3">
+                <%if(singleRes) {%>
+                    <% singleRes.bidDetails.forEach(function(BID) { %>
+                        <ul class="list-group list-group-flush mb-5 ">
 
+                            <li class="list-group-item ">
+                                Email:
+                                <%= BID.email %>
+                            </li>
+                            <li class="list-group-item ">
+                                Bid:
+                                <%= BID.bid %>
+                            </li>
+                            <li class="list-group-item ">
+                                BidNote:
+                                <%= BID.bidnote %>
+                            </li>
+                        </ul>
+                        <% }); %>
+                            <%} else {%>
+                                <div class="jumbotron">
+                                    <h1 class="display-4">Hello, There!</h1>
+                                    <p class="lead">
+                                        NO BID HERE
+                                    </p>
+                                    <hr class="my-4">
+                                </div>
+                                <%}%>
+            </div>
+
+
+            <!-- adding bid here -->
+
+            <div class="col-md-12 col-lg-12 col-sm-12 mt-3">
+                <form method="POST" action="/products/bidAdded/<%=singleRes._id%>">
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Enter Your Email" name="email" aria-describedby="basic-addon1" required="required">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" placeholder="Enter Your Bid" name="bid" aria-describedby="basic-addon1" required="required">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Any Bid Note?" name="bidnote" aria-describedby="basic-addon1">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Bid</button>
+                </form>
+            </div>
+
+
+            <!-- adding the comments here -->
+            <div class="col-md-12 mt-3">
+                <form method="POST" action="/products/commentsAdded/<%=singleRes._id%>">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Username" name="UserName" aria-label="Username" aria-describedby="basic-addon1" required="required">
+                    </div>
+                    <div class="input-group mb-3">
+                        <textarea name="Comments" id="" cols="200%" rows="2" placeholder="Enter Your Comments!" required="required"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+
+
+            </div>
+            <div class="col-lg-5 mt-3">
+
+                <%if(singleRes.comments) { %>
+
+                    <% singleRes.comments.forEach(function(c) { %>
+                        <div class="card my-3">
+                            <blockquote class="blockquote mb-0 card-body">
+                                <p>
+                                    <%= c.UserName %>
+
+                                </p>
+                                <footer class="blockquote-footer">
+                                    <p class="text-muted">
+                                        <%=c.Comments%>
+                                    </p>
+                                </footer>
+                            </blockquote>
+                        </div>
+                        <% }); %>
+                            <%} else {%>
+                                <div class="jumbotron">
+                                    <h1 class="display-4">Hello, There!</h1>
+                                    <p class="lead">
+                                        NO COMMENT HERE
+                                    </p>
+                                    <hr class="my-4">
+                                </div>
+                                <%}%>
+
+
+            </div>
         </div>
     </div>
 

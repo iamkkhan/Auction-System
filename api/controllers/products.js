@@ -1,13 +1,15 @@
 // importing the product model here
 const Product = require('../models/products');
+const Comment = require('../models/comments');
 const mongoose = require('mongoose');
-const path = require('path');
+// include node fs module
+var fs = require('fs');
 
 
 exports.getAllProducts = (req, res, next) => {
     // finding all the documents here
     Product.find()
-        .select('_id name price productImage')
+        .select('_id name price description productImage').sort({ _id: -1 })
         .exec()
         .then(doc => {
             if (doc.length > 0) {
@@ -20,6 +22,7 @@ exports.getAllProducts = (req, res, next) => {
                             price: item.price,
                             _id: item._id,
                             productImage: item.productImage,
+                            description: item.description,
                             request: {
                                 type: 'GET',
                                 url: `http://localhost:9000/products/${item._id}`
@@ -32,8 +35,11 @@ exports.getAllProducts = (req, res, next) => {
                     res: doc
                 });
 
-                // res.status(200).json(response);
+                res.status(200).json(response);
             } else {
+                res.render('pages/index', {
+                    errs: 'No Data Found'
+                });
                 res.status(404).json({
                     message: 'No Data Found Sir!'
                 });
@@ -46,37 +52,57 @@ exports.getAllProducts = (req, res, next) => {
         });
 };
 
+
+// creating the post route here
 exports.getAddProduct = (req, res, next) => {
     res.render('pages/addProducts');
 };
 
-exports.addProducts = (req, res, next) => {
-    console.log(req.file);
-    console.log(req.local);
 
-    // creating the instant here
+
+
+
+
+
+exports.AddCommentsProduct = (req, res, next) => {
+
+    // getting the id here
+    let ID = req.params.productID;
+
+
+    Product.update({ _id: ID }, { $push: { "comments": req.body } }).exec().then(AddComment => {
+        res.redirect(`/products/${ID}`);
+    })
+
+}
+
+
+
+
+
+exports.addProducts = (req, res, next) => {
+
+
+    // // creating the instant here
     const products = new Product({
         _id: new mongoose.Types.ObjectId(),
-        name: req.body.name,
-        price: req.body.price,
-        description: req.body.description,
-        productImage: req.file.path
+        name: req.body.Name,
+        price: req.body.Price,
+        description: req.body.Description,
+        productImage: req.file.filename
     });
 
-    Product.create(products, (err, newProd) => {
-        if (err) {
-            console.log(err);
-        } else {
-            res.render('/');
-        }
-    });
 
-    // saving into the DB here
+    // // saving into the DB here
     products
         .save()
         .then(result => {
+            if (result) {
+                res.render('pages/addProducts', { msg: "Added!" });
+            }
+
             res.status(201).json({
-                message: 'Order Added!',
+                message: 'Product Added!',
                 Product: {
                     name: result.name,
                     price: result.price,
@@ -89,31 +115,36 @@ exports.addProducts = (req, res, next) => {
             });
         })
         .catch(err => {
+            res.send(err)
             res.status(500).json({
                 message: err
             });
         });
+
 };
+
+
+
 
 exports.getSingleProducts = (req, res, next) => {
     // getting the id here
-    const ID = req.params.productId;
+    let ID = req.params.productID;
 
     Product.findById(ID)
-        .select('_id name price productImage')
+        .select('_id name price description productImage bidDetails comments')
         .exec()
         .then(doc => {
             res.render('pages/products', {
                 singleRes: doc
             });
 
-            res.status(200).json({
-                product: doc,
-                request: {
-                    type: 'GET',
-                    url: `http://localhost:9000/products`
-                }
-            });
+            // res.status(200).json({
+            //     product: doc,
+            //     request: {
+            //         type: 'GET',
+            //         url: `http://localhost:9000/products`
+            //     }
+            // });
         })
         .catch(err => {
             res.status(500).json({
@@ -121,58 +152,95 @@ exports.getSingleProducts = (req, res, next) => {
             });
         });
 };
+
+
+
+
+
+
+
+
+
+
+exports.getupdateProducts = (req, res, next) => {
+    // getting the id here
+    let ID = req.params.productID;
+
+    // making an array of obj here
+    // const updateOps = {};
+    // for (const ops of req.body) {
+    //     updateOps[ops.propName] = ops.value;
+    // }
+
+    Product.findById({ _id: ID }, (err, prod) => {
+        res.render('pages/edit-product', {
+            prod
+        })
+    })
+
+};
+
+
+
+
+
+
+
+
+
 
 exports.updateProducts = (req, res, next) => {
-    // getting the id here
-    const ID = req.params.productID;
+    let ID = req.params.productID;
 
-    // making an array of the update value here
-    const updateOp = {};
-    for (const op of req.body) {
-        updateOp[op.propName] = op.value;
-    }
+    Product.update({ _id: ID }, {
+        $set: {
+            name: req.body.Name,
+            description: req.body.Description,
+            price: req.body.Price,
+            productImage: req.file.filename,
+        }
+    }).exec().then(add => {
+        res.redirect('/');
+    }).catch(notAdd => {
+        res.send('Error while Updating!!');
 
-    Product.update({
-            _id: ID
-        }, {
-            $set: updateOp
-        })
-        .exec()
-        .then(results => {
-            res.status(200).json({
-                message: `Product Updated!`,
-                request: {
-                    type: 'PATCH',
-                    url: `http://localhost:9000/products/${ID}`
-                }
-            });
-        })
-        .catch(err => {
-            res.status(500).json({
-                message: err
-            });
-        });
-};
+    })
+
+}
+
+
+
+
+
 
 exports.deleteProducts = (req, res, next) => {
     // getting the id here
-    const ID = req.params.productID;
-    Product.remove({
-            _id: ID
-        })
-        .exec()
-        .then(doc => {
-            res.status(200).json({
-                message: 'Item Deleted!'
-            });
-        })
-        .catch(err => {
-            res.status(500).json({
-                message: 'No data found!',
-                request: {
-                    type: 'DELETE',
-                    url: `http://localhost:9000/products`
-                }
-            });
+    let ID = req.params.productID;
+
+    Product.findById(ID).exec().then(results => {
+        fs.unlink(`uploads/${results.productImage}`, (err) => {
+            if (err) throw err;
         });
+
+        Product.deleteOne({ _id: ID }).then(reslt => {
+            res.redirect('/');
+        }).catch(errs => {
+            res.send('Error While Deleting!');
+        })
+
+    }).catch(error => {
+        res.send('Error While Deleting!');
+    })
 };
+
+
+
+// adding the bid here
+exports.adddingBid = (req, res, next) => {
+    ID = req.params.productID;
+
+
+    Product.update({ _id: ID }, { $push: { "bidDetails": req.body } }).exec().then(updateBid => {
+        res.redirect(`/products/${ID}`);
+    })
+}

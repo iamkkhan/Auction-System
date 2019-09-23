@@ -1,7 +1,7 @@
 {
-  "env": {
-    "PORT": 9000,
-    "MONGODB_PW": "project999",
-    "MONGODB_URI": "mongodb+srv://SaifurRehman:project999@auction-system-db-9k5mh.mongodb.net/test?retryWrites=true&w=majority"
-  }
+    "env": {
+        "PORT": 9000,
+        "MONGODB_PW": "project999",
+        "MONGODB_URI": "mongodb+srv://SaifurRehman:project999@auction-system-db-9k5mh.mongodb.net/test?retryWrites=true&w=majority"
+    }
 }

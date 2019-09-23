@@ -15,7 +15,7 @@ const productSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    discription: {
+    description: {
         type: String,
         required: true
     },
@@ -23,6 +23,12 @@ const productSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    bidDetails: {
+        type: Array
+    },
+    comments: {
+        type: Array
+    }
 })
 
 // exporting the schema in the form of model
