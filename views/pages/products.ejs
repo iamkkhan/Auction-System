@@ -13,20 +13,21 @@
             <div class="card col-lg-3 col-md-3 col-sm-6">
                 <img src="/<%=singleRes.productImage%>" class=" card-img-top " alt="... ">
                 <div class="card-body ">
-                    <h5 class="card-title ">Single Product</h5>
+                    <h5 class="card-title ">
+                        <%= singleRes.name %>
+                    </h5>
 
                 </div>
                 <ul class="list-group list-group-flush ">
 
                     <li class="list-group-item ">
-                        <%= singleRes.name %>
+                        <%= singleRes.price %>
+
                     </li>
                     <li class="list-group-item ">
                         <%= singleRes.description %>
                     </li>
-                    <li class="list-group-item ">
-                        <%= singleRes.price %>
-                    </li>
+
                 </ul>
                 <div class="card-body row ">
                     <button class="btn btn-success col-md-4">

@@ -17,18 +17,18 @@
                     <div class="card col-lg-3 col-md-3 col-sm-6">
                         <img src="<%=docs.productImage%>" class=" card-img-top " alt="... " />
                         <div class="card-body ">
-                            <h5 class="card-title ">Product</h5>
+                            <h5 class="card-title ">
+                                <%= docs.name %>
+                            </h5>
 
                         </div>
                         <ul class="list-group list-group-flush ">
                             <li class="list-group-item ">
-                                <%= docs.name %>
+                                <%= docs.price %>
+
                             </li>
                             <li class="list-group-item ">
                                 <%= docs.description %>
-                            </li>
-                            <li class="list-group-item ">
-                                <%= docs.price %>
                             </li>
 
                         </ul>
