@@ -1,0 +1,46 @@
+<!-- views/pages/index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %>
+</head>
+
+<body>
+
+    <div class="container">
+        <% include ../partials/msgs %>
+            <form action="/register" method="POST">
+                <label for="name">Name</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="name" placeholder="Username" value=" <%=typeof name != 'undefined' ? name : '' %>">
+                </div>
+                <label for="email">Email</label>
+                <div class="input-group mb-3">
+                    <input type="email" class="form-control" name="email" placeholder="Email" value=" <%=typeof email != 'undefined' ? email : '' %>">
+                </div>
+                <label for="password">Password</label>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" name="password" placeholder="Password" value=" <%=typeof email != 'undefined' ? password : '' %>">
+                </div>
+                <label for="Cpassword">Confirm Password</label>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" name="Cpassword" placeholder="Confirm Password" value=" <%=typeof email != 'undefined' ? Cpassword : '' %>">
+                </div>
+                <button type="submit" name="" id="" class="btn btn-info">Register</button>
+            </form>
+            <p>Have an account? <a href="/login" class="btn btn-primary">Login</a></p>
+    </div>
+</body>
+<footer>
+    <% include ../partials/footer %>
+</footer>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
+</body>
+
+</html>

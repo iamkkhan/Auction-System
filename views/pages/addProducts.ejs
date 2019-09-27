@@ -8,38 +8,41 @@
 
 <body>
     <div class="container mt-5">
+        <h1>Welcome!,
+            <%=USER%>
+        </h1>
         <%= typeof msg!= 'undefined' ? msg : '' %>
             <div class="row align-center">
+                <h1></h1>
                 <form method="POST" action="/products/add-product" enctype="multipart/form-data">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputName">Name</label>
-                            <input type="text" class="form-control" placeholder="Name" name="Name" required='required' />
+                            <input type="text" class="form-control" placeholder="Name" name="Name" required="required" />
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputDiscriptiom">Description</label>
-                            <input type="text" class="form-control" placeholder="Description" name="Description" required='required' />
+                            <input type="text" class="form-control" placeholder="Description" name="Description" required="required" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputPrice">Price</label>
-                        <input type="text" class="form-control" placeholder="Price" name="Price" required='required' />
+                        <input type="text" class="form-control" placeholder="Price" name="Price" required="required" />
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Select File</label>
-                        <input type="file" class="form-control-file" name="File" required='required' />
+                        <input type="file" class="form-control-file" name="File" required="required" />
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <button class="btn btn-success col-md-4">
-                            <a href="/" class="text-white">Back To Page</a>
-                        </button>
+            <a href="/" class="text-white">Back To Page</a>
+          </button>
                 </form>
             </div>
     </div>
 
     <footer>
         <% include ../partials/footer %>
-
     </footer>
 
     <!-- Optional JavaScript -->

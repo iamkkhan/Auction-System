@@ -1,15 +1,15 @@
 // importing the product model here
-const Product = require('../models/products');
-const Comment = require('../models/comments');
-const mongoose = require('mongoose');
+const Product = require("../models/products");
+const Comment = require("../models/comments");
+const mongoose = require("mongoose");
 // include node fs module
-var fs = require('fs');
-
+var fs = require("fs");
 
 exports.getAllProducts = (req, res, next) => {
     // finding all the documents here
     Product.find()
-        .select('_id name price description productImage').sort({ _id: -1 })
+        .select("_id name price description productImage")
+        .sort({ _id: -1 })
         .exec()
         .then(doc => {
             if (doc.length > 0) {
@@ -24,65 +24,54 @@ exports.getAllProducts = (req, res, next) => {
                             productImage: item.productImage,
                             description: item.description,
                             request: {
-                                type: 'GET',
+                                type: "GET",
                                 url: `http://localhost:9000/products/${item._id}`
                             }
                         };
                     })
                 };
 
-                res.render('pages/index', {
+                res.render("pages/index", {
                     res: doc
                 });
 
                 res.status(200).json(response);
             } else {
-                res.render('pages/index', {
-                    errs: 'No Data Found'
+                res.render("pages/index", {
+                    errs: "No Data Found"
                 });
                 res.status(404).json({
-                    message: 'No Data Found Sir!'
+                    message: "No Data Found Sir!"
                 });
             }
         })
         .catch(err => {
+            console.log(err);
             res.status(500).json({
                 message: err
             });
         });
 };
 
-
 // creating the post route here
 exports.getAddProduct = (req, res, next) => {
-    res.render('pages/addProducts');
+    res.render("pages/addProducts", {
+        USER: req.user.name
+    });
 };
 
-
-
-
-
-
-
 exports.AddCommentsProduct = (req, res, next) => {
-
     // getting the id here
     let ID = req.params.productID;
 
-
-    Product.update({ _id: ID }, { $push: { "comments": req.body } }).exec().then(AddComment => {
-        res.redirect(`/products/${ID}`);
-    })
-
-}
-
-
-
-
+    Product.update({ _id: ID }, { $push: { comments: req.body } })
+        .exec()
+        .then(AddComment => {
+            res.redirect(`/products/${ID}`);
+        });
+};
 
 exports.addProducts = (req, res, next) => {
-
-
     // // creating the instant here
     const products = new Product({
         _id: new mongoose.Types.ObjectId(),
@@ -92,49 +81,44 @@ exports.addProducts = (req, res, next) => {
         productImage: req.file.filename
     });
 
-
     // // saving into the DB here
     products
         .save()
         .then(result => {
             if (result) {
-                res.render('pages/addProducts', { msg: "Added!" });
+                res.render("pages/addProducts", { msg: "Added!" });
             }
 
             res.status(201).json({
-                message: 'Product Added!',
+                message: "Product Added!",
                 Product: {
                     name: result.name,
                     price: result.price,
                     _id: result._id,
                     request: {
-                        type: 'POST',
+                        type: "POST",
                         url: `http://localhost:9000/products/${result._id}`
                     }
                 }
             });
         })
         .catch(err => {
-            res.send(err)
+            res.send(err);
             res.status(500).json({
                 message: err
             });
         });
-
 };
-
-
-
 
 exports.getSingleProducts = (req, res, next) => {
     // getting the id here
     let ID = req.params.productID;
 
     Product.findById(ID)
-        .select('_id name price description productImage bidDetails comments')
+        .select("_id name price description productImage bidDetails comments")
         .exec()
         .then(doc => {
-            res.render('pages/products', {
+            res.render("pages/products", {
                 singleRes: doc
             });
 
@@ -153,15 +137,6 @@ exports.getSingleProducts = (req, res, next) => {
         });
 };
 
-
-
-
-
-
-
-
-
-
 exports.getupdateProducts = (req, res, next) => {
     // getting the id here
     let ID = req.params.productID;
@@ -173,74 +148,63 @@ exports.getupdateProducts = (req, res, next) => {
     // }
 
     Product.findById({ _id: ID }, (err, prod) => {
-        res.render('pages/edit-product', {
+        res.render("pages/edit-product", {
             prod
-        })
-    })
-
+        });
+    });
 };
-
-
-
-
-
-
-
-
-
 
 exports.updateProducts = (req, res, next) => {
     let ID = req.params.productID;
 
     Product.update({ _id: ID }, {
-        $set: {
-            name: req.body.Name,
-            description: req.body.Description,
-            price: req.body.Price,
-            productImage: req.file.filename,
-        }
-    }).exec().then(add => {
-        res.redirect('/');
-    }).catch(notAdd => {
-        res.send('Error while Updating!!');
-
-    })
-
-}
-
-
-
-
-
+            $set: {
+                name: req.body.Name,
+                description: req.body.Description,
+                price: req.body.Price,
+                productImage: req.file.filename
+            }
+        })
+        .exec()
+        .then(add => {
+            res.redirect("/");
+        })
+        .catch(notAdd => {
+            res.send("Error while Updating!!");
+        });
+};
 
 exports.deleteProducts = (req, res, next) => {
     // getting the id here
     let ID = req.params.productID;
 
-    Product.findById(ID).exec().then(results => {
-        fs.unlink(`uploads/${results.productImage}`, (err) => {
-            if (err) throw err;
-        });
+    Product.findById(ID)
+        .exec()
+        .then(results => {
+            fs.unlink(`uploads/${results.productImage}`, err => {
+                if (err) throw err;
+            });
 
-        Product.deleteOne({ _id: ID }).then(reslt => {
-            res.redirect('/');
-        }).catch(errs => {
-            res.send('Error While Deleting!');
+            Product.deleteOne({ _id: ID })
+                .then(reslt => {
+                    res.redirect("/");
+                })
+                .catch(errs => {
+                    res.send("Error While Deleting!");
+                });
         })
-
-    }).catch(error => {
-        res.send('Error While Deleting!');
-    })
+        .catch(error => {
+            res.send("Error While Deleting!");
+        });
 };
-
-
 
 // adding the bid here
 exports.adddingBid = (req, res, next) => {
     ID = req.params.productID;
 
-
-    Product.update({ _id: ID }, { $push: { "bidDetails": req.body } }).exec().then(updateBid => {
-        res.redirect(`/products/${ID}`);
-    })
-}
+    Product.update({ _id: ID }, { $push: { bidDetails: req.body } })
+        .exec()
+        .then(updateBid => {
+            res.redirect(`/products/${ID}`);
+        });
+};
