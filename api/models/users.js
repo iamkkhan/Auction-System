@@ -8,18 +8,19 @@ const mongoose = require('mongoose');
 // also validating the mongoose here to pass the data 
 // validating in the form of objects
 const userSchema = mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
-    // connected to which product
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
-    },
-    password: {
-        type: String,
-        required: true
-    }
+
+    // email: {
+    //     type: String,
+    //     required: true,
+    //     unique: true,
+    //     match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+    // },
+    // password: {
+    //     type: String,
+    //     required: true
+    // }
+
+
 })
 
 // exporting the schema in the form of model

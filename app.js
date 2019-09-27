@@ -72,6 +72,7 @@ app.use(productRoutes);
 
 
 
+
 // setting up the error handling here
 app.use((req, res, next) => {
     const err = new Error('Not Found!');
