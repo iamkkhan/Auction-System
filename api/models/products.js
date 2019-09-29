@@ -32,6 +32,10 @@ const productSchema = mongoose.Schema({
     },
     comments: {
         type: Array
+    },
+    date: {
+        type: Date,
+        default: Date.now
     }
 });
 

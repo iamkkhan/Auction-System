@@ -2,13 +2,14 @@
 const Product = require("../models/products");
 const Comment = require("../models/comments");
 const mongoose = require("mongoose");
+const moment = require("moment");
 // include node fs module
 var fs = require("fs");
 
 exports.getAllProducts = (req, res, next) => {
     // finding all the documents here
     Product.find()
-        .select("_id name price description productImage")
+        .select("_id name price description productImage Category date")
         .sort({ _id: -1 })
         .exec()
         .then(doc => {
@@ -73,7 +74,6 @@ exports.AddCommentsProduct = (req, res, next) => {
 
 exports.addProducts = (req, res, next) => {
     // // creating the instant here
-    console.log(req.body);
     const products = new Product({
         _id: new mongoose.Types.ObjectId(),
         name: req.body.Name,
@@ -117,11 +117,21 @@ exports.getSingleProducts = (req, res, next) => {
     let ID = req.params.productID;
 
     Product.findById(ID)
-        .select("_id name price description productImage bidDetails comments")
+        .select(
+            "_id name price description productImage bidDetails comments Category date"
+        )
         .exec()
         .then(doc => {
+            var getDate = moment(doc.date).format("YYYY, MM, D,  h:mm:ss a");
+            var dateFromNow = moment(getDate).fromNow();
+
+            // var dateString = getDate.toString();
+            // var haha = moment([2007, 0, 29]).fromNow();
+            // console.log(haha);
             res.render("pages/products", {
-                singleRes: doc
+                singleRes: doc,
+                formatDate: moment(doc.date).format("MMMM Do YYYY"),
+                NOW: dateFromNow
             });
 
             // res.status(200).json({
