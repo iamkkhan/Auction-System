@@ -21,6 +21,7 @@ router.post("/products/add-product", productController.addProducts);
 // adding the comments in the single products
 router.post(
     "/products/commentsAdded/:productID",
+    ensureAuthenticated,
     productController.AddCommentsProduct
 );
 
@@ -30,19 +31,29 @@ router.get("/products/:productID", productController.getSingleProducts);
 // get update request for the single users
 router.get(
     "/products/edit-product/:productID",
+    ensureAuthenticated,
     productController.getupdateProducts
 );
 
 // update request for the single users
-router.post("/productEdit/:productID", productController.updateProducts);
+router.post(
+    "/productEdit/:productID",
+    ensureAuthenticated,
+    productController.updateProducts
+);
 
 // delete request for the single users
 router.get(
     "/products/delete-product/:productID",
+    ensureAuthenticated,
     productController.deleteProducts
 );
 
 // adding the bid for the single product
-router.post("/products/bidAdded/:productID", productController.adddingBid);
+router.post(
+    "/products/bidAdded/:productID",
+    ensureAuthenticated,
+    productController.adddingBid
+);
 
 module.exports = router;

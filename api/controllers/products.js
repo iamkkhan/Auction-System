@@ -73,20 +73,22 @@ exports.AddCommentsProduct = (req, res, next) => {
 
 exports.addProducts = (req, res, next) => {
     // // creating the instant here
+    console.log(req.body);
     const products = new Product({
         _id: new mongoose.Types.ObjectId(),
         name: req.body.Name,
         price: req.body.Price,
         description: req.body.Description,
-        productImage: req.file.filename
+        productImage: req.file.filename,
+        Category: req.body.selectpicker
     });
 
-    // // saving into the DB here
+    // saving into the DB here
     products
         .save()
         .then(result => {
             if (result) {
-                res.render("pages/addProducts", { msg: "Added!" });
+                res.render("pages/addProducts", { MSG: "Added!", USER: req.user.name });
             }
 
             res.status(201).json({
@@ -132,7 +134,7 @@ exports.getSingleProducts = (req, res, next) => {
         })
         .catch(err => {
             res.status(500).json({
-                message: err
+                message: "err"
             });
         });
 };
