@@ -17,27 +17,30 @@
         <div class="row">
             <%if(res) {%>
                 <% res.forEach(function(docs) { %>
-                    <div class="card col-lg-3 col-md-3 col-sm-6">
-                        <img src="<%=docs.productImage%>" class=" card-img-top " alt="... " />
-                        <div class="card-body ">
-                            <h5 class="card-title ">
-                                <%= docs.name %>
-                            </h5>
+                    <a href="/products/<%=docs._id%>" class="card col-lg-3 col-md-3 col-sm-6 text-dark m-3">
+                        <div class="text-black">
+                            <img src="<%=docs.productImage%>" class=" card-img-top " alt="... " />
+                            <div class="card-body ">
+                                <h5 class="card-title ">
+                                    Name =
+                                    <%= docs.name %>
+                                </h5>
+                            </div>
+                            <ul class="list-group list-group-flush ">
+                                <li class="list-group-item ">
+                                    Price =
+                                    <%= docs.price %>
+                                </li>
+                                <li class="list-group-item ">
+                                    description =
+                                    <%= docs.description %>
+                                </li>
+                            </ul>
+                            <div class="card-body ">
+                                <!-- <button class="btn btn-success "> </button> -->
+                            </div>
                         </div>
-                        <ul class="list-group list-group-flush ">
-                            <li class="list-group-item ">
-                                <%= docs.price %>
-                            </li>
-                            <li class="list-group-item ">
-                                <%= docs.description %>
-                            </li>
-                        </ul>
-                        <div class="card-body ">
-                            <button class="btn btn-success ">
-              <a href="/products/<%=docs._id%>" class="text-white">More Info</a>
-            </button>
-                        </div>
-                    </div>
+                    </a>
 
                     <% }); %>
                         <%} else {%>

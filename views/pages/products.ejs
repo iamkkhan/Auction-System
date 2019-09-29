@@ -13,31 +13,37 @@
                 <img src="/<%=singleRes.productImage%>" class=" card-img-top " alt="... " />
                 <div class="card-body ">
                     <h5 class="card-title ">
+                        Name =
                         <%= singleRes.name %>
                     </h5>
                 </div>
                 <ul class="list-group list-group-flush ">
                     <li class="list-group-item ">
+                        Price =
                         <%= singleRes.price %>
                     </li>
                     <li class="list-group-item ">
+                        Description =
                         <%= singleRes.description %>
                     </li>
                     <li class="list-group-item ">
+                        Category =
                         <%= singleRes.Category %>
                     </li>
                     <li class="list-group-item ">
+                        Product Posted =
                         <%= formatDate%>
                     </li>
                     <li class="list-group-item ">
+                        Last Update =
                         <%= NOW%>
                     </li>
                 </ul>
                 <div class="card-body row ">
-                    <button class="btn btn-success col-md-4">
+                    <button class="btn btn-success col-md-12">
               <a href="/" class="text-white">Back To Page</a>
             </button>
-                    <button class="btn btn-info col-md-4">
+                    <!-- <button class="btn btn-info col-md-4">
               <a
                 href="/products/edit-product/<%=singleRes._id%>"
                 class="text-white"
@@ -50,7 +56,7 @@
                 class="text-white"
                 >Delete</a
               >
-            </button>
+            </button> -->
                 </div>
             </div>
 
