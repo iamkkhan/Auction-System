@@ -19,6 +19,7 @@ require("./api/config/passport")(passport);
 const userRoutes = require("./api/routes/users");
 const bidRoutes = require("./api/routes/bids");
 const productRoutes = require("./api/routes/products");
+const searchRoutes = require("./api/routes/search");
 
 app.use(morgan("dev"));
 
@@ -87,6 +88,7 @@ app.use((req, res, next) => {
 app.use(userRoutes);
 app.use(bidRoutes);
 app.use(productRoutes);
+app.use(searchRoutes);
 
 // setting up the error handling here
 app.use((req, res, next) => {
