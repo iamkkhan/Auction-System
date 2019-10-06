@@ -20,8 +20,6 @@ router.get("/welcome", (req, res) => {
     res.render("pages/Welcome");
 });
 
-
-
 // signup Handle
 router.post("/register", (req, res) => {
     const { name, email, password, Cpassword } = req.body;

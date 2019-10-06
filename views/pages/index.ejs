@@ -9,9 +9,6 @@
 <body>
     <% include ../partials/header %>
         <div class="">
-
-
-
             <!-- --------------------banner------------------ -->
             <section class="banner">
                 <div class="banner-content">
@@ -22,9 +19,8 @@
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, facilis.
                     </p>
                     <a href="/products/add-product" class="banner-content__button">
-                        sale products
-
-                    </a>
+            sale products
+          </a>
                     <img class="img-animate img-animate9" src="icons8-add-shopping-cart-100.png" />
                     <img class="img-animate img-animate1" src="icons8-bicycle-100.png" /><img class="img-animate  img-animate10" src="icons8-boot-open-100.png" /><img class="img-animate  img-animate2" src="icons8-car-100.png" /><img class="img-animate  img-animate3"
                         src="icons8-fidget-spinner-100.png" />
@@ -34,14 +30,10 @@
                 </div>
             </section>
 
-
-
-
             <!-- ----------------------- product card -------------------- -->
             <%if(res) { %>
                 <% res.forEach((docs) => { %>
                     <a href="/products/<%=docs._id%>">
-
                         <section class="product-card">
                             <div class="wrapper">
                                 <div class="product-card-inner">
@@ -58,31 +50,32 @@
                                         <%= docs.description %>
                                     </p>
                                 </div>
-                                <div class="product-card-outer-4">
-                                    <p class="product-card__post-date">
-                                        <%=docs.date %>
-                                    </p>
-                                </div>
+
                                 <div class="product-card-outer-3">
-                                    <label for="" class="product-card__label"> <%= docs.price %>$</label>
-                                    <button class="product-card__button"></button>
-                                    <button class="product-card__button-2">Buy Now!</button>
-                                </div>
-                            </div>
-                        </section>
+                                    <label for="" class="product-card__label">
+                <%= docs.price %>$</label
+              >
+              <button class="product-card__button"></button>
+              <button class="product-card__button-2">Buy Now!</button>
+            </div>
+          </div>
+        </section>
+      </a>
 
-                    </a>
+      <%}); %> <%}%>
+    </div>
 
-                    <%}); %>
-                        <%}%>
-
-        </div>
-
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
-        <script src="https://kit.fontawesome.com/37b0091828.js" crossorigin="anonymous"></script>
-        <script src="app.js"></script>
-</body>
-
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js "
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo "
+      crossorigin="anonymous "
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/37b0091828.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="app.js"></script>
+  </body>
 </html>

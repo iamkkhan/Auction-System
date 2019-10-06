@@ -31,9 +31,9 @@ exports.getAllProducts = (req, res, next) => {
                         };
                     })
                 };
-
                 res.render("pages/index", {
-                    res: doc
+                    res: doc,
+                    productPosted: moment(res.date).format("MMMM Do YYYY")
                 });
 
                 res.status(200).json(response);
@@ -131,8 +131,7 @@ exports.getSingleProducts = (req, res, next) => {
             res.render("pages/products", {
                 singleRes: doc,
                 formatDate: moment(doc.date).format("MMMM Do YYYY"),
-                NOW: dateFromNow,
-                ok: "okay"
+                NOW: dateFromNow
             });
 
             // res.status(200).json({

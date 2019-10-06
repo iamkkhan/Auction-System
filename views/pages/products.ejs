@@ -28,6 +28,16 @@
                 color: var(--text-black);
             }
             
+            .cent {
+                text-align: center;
+                font-size: 3rem;
+                font-weight: 100;
+            }
+            
+            .height {
+                height: 10vh;
+            }
+            
             h1 {
                 font-weight: bold;
                 margin: 0;
@@ -1474,7 +1484,7 @@
                     <div class="col col-2">Bid</div>
                     <div class="col col-3">Bid Note</div>
                 </li>
-                <%if(!singleRes) {%>
+                <%if(singleRes.bidDetails && singleRes.bidDetails.length) {%>
                     <% singleRes.bidDetails.forEach(function(BID) { %>
                         <li class="table-row">
                             <div class="col col-1" data-label="Email">
@@ -1489,8 +1499,8 @@
 
                         <% }); %>
                             <%} else { %>
-                                <h1>
-                                    <%= ok %>
+                                <h1 class="cent">
+                                    No Bids Yet!
                                 </h1>
 
                                 <% } %>
@@ -1557,7 +1567,7 @@
                     <div class="col col-5">Name</div>
                     <div class="col col-6">Comment</div>
                 </li>
-                <%if(singleRes.comments) { %>
+                <%if(singleRes.comments && singleRes.comments.length) { %>
                     <%
                   singleRes.comments.forEach(function(c) { %>
                         <li class="table-row">
@@ -1570,10 +1580,11 @@
                         </li>
                         <% }); %>
                             <%} else {%>
-                                <h2>No Comments</h2>
+                                <h1 class="cent">No Comments</h1>
                                 <% } %>
             </ul>
         </section>
+        <div class="height"></div>
 
 
     </div>
