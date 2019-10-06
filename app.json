@@ -1,0 +1,8 @@
+{
+    "name": "restfulapi_proj",
+    "version": "1.0.0",
+    "description": "Olx and Daraz like WebApp",
+    "keywords": ["node", "restApi", "MongoDB", "Express"],
+    "website": "https://small-sharp-tool.com/",
+    "repository": "https://github.com/SaifRehman99/Auction-System"
+}
