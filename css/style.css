@@ -103,6 +103,7 @@ a {
   padding: 20px 20px;
   margin: 4px 2px;
   border-radius: 50%;
+  border: 3px solid #4bb4de;
 }
 
 .search-bar {
@@ -112,10 +113,6 @@ a {
   float: right;
 }
 
-.header__button-search:hover ~ .search-bar__input {
-  opacity: 1;
-  animation: expand 0.6s ease-in 1 both;
-}
 .search-bar__input {
   margin: 2px;
   padding: 10px;
@@ -123,40 +120,13 @@ a {
   border: none;
   height: 38px;
   top: 6px;
-  width: 0px;
+  width: 300px;
   position: absolute;
   right: 30px;
-  opacity: 0;
-  background-color: var(--primary-one);
-  box-shadow: 2px 2px 10px var(--primary-one);
-  outline: none;
-}
-
-.animate-input {
   opacity: 1;
-  animation: expand 0.6s ease-in 1 both;
-}
-
-@keyframes expand {
-  0% {
-    width: 0px;
-    transform: scale(0);
-  }
-  100% {
-    width: 300px;
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.animate-button i {
-  animation: rotate 0.6s ease-in 1 both;
-}
-
-.animate-button {
-  border: 3px solid var(--text-black);
-  background-color: var(--text-black);
-  color: var(--text-black);
+  background-color: var(--primary-one);
+  box-shadow: 2px 2px 10px var(--secondary-two);
+  outline: none;
 }
 
 .animate-input-reverse {
@@ -548,6 +518,7 @@ button:focus {
   }
   .search-bar__input {
     height: 30px;
+    width: 150px;
   }
   .header__i {
     position: absolute;
