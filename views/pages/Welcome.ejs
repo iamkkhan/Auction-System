@@ -7,13 +7,79 @@
 
 <body>
 
+    <% include ../partials/header %>
 
-    <div class="container text-center">
-        <h1>hello to my app</h1>
-        <p>Create account or Login</p>
-        <a href="/login" class="btn btn-success">Login</a>
-        <a href="/register" class="btn btn-danger">Register</a>
-    </div>
+
+        <!-- ----------------------- signin/signout form -------------------- -->
+        <section class="outer-container">
+            <section class="container">
+                <section class="container-form container-form-sign-up">
+
+                    <% include ../partials/msgs %>
+                        <form action="/register" class="sign-up-form" method="POST">
+                            <h1>Create Account</h1>
+                            <div class="container-social">
+                                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social"><i class="fab fa-google-plus-g"></i
+                    ></a>
+                                <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                            <span> Use your email for registration</span>
+                            <input type="text" placeholder="Username" name="name" value=" <%=typeof name != 'undefined' ? name : '' %>" />
+
+                            <input type="email" placeholder="Email" name="email" value=" <%=typeof email != 'undefined' ? email : '' %>" />
+                            <input type="password" placeholder="Password" name="password" />
+                            <input type="password" placeholder="Confirm Password" name="Cpassword" />
+                            <button type="submit" class="button__login-from">Sign Up</button>
+                        </form>
+                </section>
+
+
+
+
+                <section class="container-form container-form-sign-in">
+                    <form action="/welcome" method="POST" class="sign-up-form">
+                        <h1>Sign In</h1>
+                        <div class="container-social">
+                            <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social"><i class="fab fa-google-plus-g"></i
+                    ></a>
+                            <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                        <span> Use your account</span>
+                        <% include ../partials/msgs %>
+
+                            <input type="email" placeholder="Email" name="email" value=" <%=typeof email != 'undefined' ? email : '' %>" />
+                            <input type="password" placeholder="Password" name="password" />
+
+                            <button class="button__login-from" type="submit">Sign In</button>
+                    </form>
+                </section>
+                <section class="overlay-container">
+                    <div class="overlay">
+                        <div class="overlay-panel overlay-sign-in">
+                            <h1 class="overlay__main-head">Welcome Back</h1>
+                            <p class="overlay__slogan">
+                                To keep connected with us please login with your personal info
+                            </p>
+                            <button class="button button__login-from  overlay__button-ghost overlay__button-sign-in">
+                      Sign in
+                    </button>
+                        </div>
+                        <div class="overlay-panel overlay-sign-up">
+                            <h1 class="overlay__main-head">Hello, Friends!</h1>
+                            <p class="overlay__slogan">
+                                Enter your personal details and start journey with us
+                            </p>
+                            <button class="button button__login-from  overlay__button-ghost overlay__button-sign-up">
+                      Sign Up
+                    </button>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </section>
+
 
 </body>
 
@@ -22,8 +88,9 @@
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
+<script src="https://kit.fontawesome.com/37b0091828.js" crossorigin="anonymous"></script>
+
+<script src="app.js"></script>
 </body>
 
 </html>

@@ -90,6 +90,22 @@ app.use(bidRoutes);
 app.use(productRoutes);
 app.use(searchRoutes);
 
+
+
+// serving the css files static here
+app.use(express.static(path.join(__dirname, "css")));
+
+
+
+// serving the js files static here
+app.use(express.static(path.join(__dirname, "js")));
+
+
+// serving the images folder here
+app.use(express.static(path.join(__dirname, "img")));
+
+
+
 // setting up the error handling here
 app.use((req, res, next) => {
     const err = new Error("Not Found!");

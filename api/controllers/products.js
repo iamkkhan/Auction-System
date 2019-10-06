@@ -83,6 +83,7 @@ exports.addProducts = (req, res, next) => {
         Category: req.body.selectpicker
     });
 
+
     // saving into the DB here
     products
         .save()

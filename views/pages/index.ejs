@@ -7,67 +7,82 @@
 </head>
 
 <body>
-    <div class="container mt-5">
-        <!-- Search form -->
-        <form action="/search-product" method="GET">
-            <div class="md-form m-5">
-                <input class="form-control" type="text" placeholder="Search By Category.." aria-label="Search" name="search" />
-                <input type="submit" value="search" />
-            </div>
-        </form>
+    <% include ../partials/header %>
+        <div class="">
 
-        <button class="btn btn-danger">
-        <a href="/products/add-product" class="text-white">Add Products</a>
-      </button>
-        <a href="/welcome" class="btn btn btn-success">Icon Here</a>
-        <a href="/logout" class="btn btn-secondary logOUT">OUT</a>
 
-        <div class="row">
-            <%if(res) {%>
-                <% res.forEach(function(docs) { %>
-                    <a href="/products/<%=docs._id%>" class="card col-lg-3 col-md-3 col-sm-6 text-dark m-3">
-                        <div class="text-black">
-                            <img src="<%=docs.productImage%>" class=" card-img-top " alt="... " />
-                            <div class="card-body ">
-                                <h5 class="card-title ">
-                                    Name =
-                                    <%= docs.name %>
-                                </h5>
+
+            <!-- --------------------banner------------------ -->
+            <section class="banner">
+                <div class="banner-content">
+                    <h1 class="banner-content__title">
+                        Cart Verse
+                    </h1>
+                    <p class="banner-content__intro">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, facilis.
+                    </p>
+                    <a href="/products/add-product" class="banner-content__button">
+                        sale products
+
+                    </a>
+                    <img class="img-animate img-animate9" src="icons8-add-shopping-cart-100.png" />
+                    <img class="img-animate img-animate1" src="icons8-bicycle-100.png" /><img class="img-animate  img-animate10" src="icons8-boot-open-100.png" /><img class="img-animate  img-animate2" src="icons8-car-100.png" /><img class="img-animate  img-animate3"
+                        src="icons8-fidget-spinner-100.png" />
+                    <img class="img-animate  img-animate12" src="icons8-game-controller-100.png" /><img class="img-animate  img-animate6" src="icons8-telephone-100.png" /><img class="img-animate  img-animate7" src="icons8-headset-100.png" />
+                    <img class="img-animate  img-animate13" src="icons8-laptop-100.png" /><img class="img-animate  img-animate8" src="icons8-smartphone-tablet-100.png" />
+                    <img class="img-animate  img-animate5" src="icons8-grocery-shelf-100.png" />
+                </div>
+            </section>
+
+
+
+
+            <!-- ----------------------- product card -------------------- -->
+            <%if(res) { %>
+                <% res.forEach((docs) => { %>
+                    <a href="/products/<%=docs._id%>">
+
+                        <section class="product-card">
+                            <div class="wrapper">
+                                <div class="product-card-inner">
+                                    <img src="<%= docs.productImage %>" alt="" class="product__image" />
+                                </div>
+                                <div class="product-card-outer-1">
+                                    <h3 class="product-card__head">
+                                        <%= docs.name %>
+                                    </h3>
+                                    <span class="product-card__catogary"> <%= docs.Category %></span>
+                                </div>
+                                <div class="product-card-outer-2">
+                                    <p class="product-card__description">
+                                        <%= docs.description %>
+                                    </p>
+                                </div>
+                                <div class="product-card-outer-4">
+                                    <p class="product-card__post-date">
+                                        <%=docs.date %>
+                                    </p>
+                                </div>
+                                <div class="product-card-outer-3">
+                                    <label for="" class="product-card__label"> <%= docs.price %>$</label>
+                                    <button class="product-card__button"></button>
+                                    <button class="product-card__button-2">Buy Now!</button>
+                                </div>
                             </div>
-                            <ul class="list-group list-group-flush ">
-                                <li class="list-group-item ">
-                                    Price =
-                                    <%= docs.price %>
-                                </li>
-                                <li class="list-group-item ">
-                                    description =
-                                    <%= docs.description %>
-                                </li>
-                            </ul>
-                            <div class="card-body ">
-                                <!-- <button class="btn btn-success "> </button> -->
-                            </div>
-                        </div>
+                        </section>
+
                     </a>
 
-                    <% }); %>
-                        <%} else {%>
-                            <div class="jumbotron">
-                                <h1 class="display-4">Hello, There!</h1>
-                                <p class="lead">
-                                    <%=errs%>
-                                </p>
-                                <hr class="my-4" />
-                            </div>
-                            <%}%>
-        </div>
-    </div>
+                    <%}); %>
+                        <%}%>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
+        </div>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
+        <script src="https://kit.fontawesome.com/37b0091828.js" crossorigin="anonymous"></script>
+        <script src="app.js"></script>
 </body>
 
 </html>

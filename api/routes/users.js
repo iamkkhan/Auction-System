@@ -20,17 +20,9 @@ router.get("/welcome", (req, res) => {
     res.render("pages/Welcome");
 });
 
-// login here
-router.get("/login", (req, res) => {
-    res.render("pages/login");
-});
 
-// Register here
-router.get("/register", (req, res) => {
-    res.render("pages/register");
-});
 
-// register Handle
+// signup Handle
 router.post("/register", (req, res) => {
     const { name, email, password, Cpassword } = req.body;
 
@@ -51,7 +43,7 @@ router.post("/register", (req, res) => {
     }
 
     if (errors.length > 0) {
-        res.render("pages/register", {
+        res.render("pages/Welcome", {
             errors,
             name,
             email,
@@ -62,7 +54,7 @@ router.post("/register", (req, res) => {
         user.findOne({ email: email }).then(result => {
             if (result) {
                 errors.push({ msg: "USER EXIST!" });
-                res.render("pages/register", {
+                res.render("pages/Welcome", {
                     errors,
                     name,
                     email,
@@ -91,7 +83,7 @@ router.post("/register", (req, res) => {
                                     "success_msg",
                                     "Woah!, Registered You can now login MAN"
                                 );
-                                res.redirect("/login");
+                                res.redirect("/welcome");
                             })
                             .catch(error => {
                                 res.send(err);
@@ -105,10 +97,10 @@ router.post("/register", (req, res) => {
 });
 
 // login Handle
-router.post("/login", (req, res, next) => {
+router.post("/welcome", (req, res, next) => {
     passport.authenticate("local", {
         successRedirect: "products/add-product",
-        failureRedirect: "/login",
+        failureRedirect: "/welcome",
         failureFlash: true
     })(req, res, next);
 });
@@ -117,7 +109,7 @@ router.post("/login", (req, res, next) => {
 router.get("/logout", (req, res, next) => {
     req.logOut();
     req.flash("success_msg", "You're logout!");
-    res.redirect("/login");
+    res.redirect("/welcome");
 });
 
 module.exports = router;

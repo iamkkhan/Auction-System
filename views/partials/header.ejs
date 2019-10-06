@@ -1,16 +1,28 @@
-<nav class="navbar navbar-default" role="navigation">
-    <div class="container">
+<!-- ---------------header--------------- -->
+<header class="header">
+    <a href="/">
+        <img class="header__logo" src="logo.png" alt="">
+    </a>
+    <a href="/welcome">
+        <button class="button header__button header__button-sign-up">
+            <i class="fas fa-user-plus header__i"></i> sign up/login
+          </button>
+    </a>
 
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">
-                <span class="glyphicon glyphicon glyphicon-tree-deciduous"></span> EJS Is Fun
-            </a>
+    <button class="button header__button header__button-sign-up-s">
+      <i class="fas fa-user-plus header__i"></i>
+    </button>
 
-            <ul class="nav navbar-nav">
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-            </ul>
+
+
+    <!-- Search form -->
+    <form action="/search-product" method="GET" class="search-bar">
+        <div>
+            <input type="text" class="search-bar__input" placeholder="Search By Category.." aria-label="Search" name="search" />
+            <button class="button header__button header__button-search">
+          <i class="fas fa-search search-icon header__i"></i>
+          
+            </button>
         </div>
-
-    </div>
-</nav>
+    </form>
+</header>
