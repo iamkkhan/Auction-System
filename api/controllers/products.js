@@ -83,7 +83,6 @@ exports.addProducts = (req, res, next) => {
         Category: req.body.selectpicker
     });
 
-
     // saving into the DB here
     products
         .save()
@@ -132,7 +131,8 @@ exports.getSingleProducts = (req, res, next) => {
             res.render("pages/products", {
                 singleRes: doc,
                 formatDate: moment(doc.date).format("MMMM Do YYYY"),
-                NOW: dateFromNow
+                NOW: dateFromNow,
+                ok: "okay"
             });
 
             // res.status(200).json({
