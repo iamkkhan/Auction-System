@@ -1,5 +1,9 @@
 /* -------------------------------------------- basic csss -------------------------------- */
 
+.banner-content__title {
+    font-size: 100px !important;
+}
+
 * {
     box-sizing: border-box;
     margin: 0px;
@@ -1402,5 +1406,19 @@ h2 small {
         flex-direction: row;
         justify-content: center;
         align-content: center;
+    }
+}
+
+@media all and (max-width: 800px) {
+    .product-card {
+        height: 25vh;
+        width: 10wh;
+    }
+    .banner-content__button {
+        font-size: 13px;
+        padding: 7px;
+    }
+    .banner-content__title {
+        font-size: 40px;
     }
 }
