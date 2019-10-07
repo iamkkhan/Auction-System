@@ -1488,7 +1488,7 @@
                     <% singleRes.bidDetails.forEach(function(BID) { %>
                         <li class="table-row">
                             <div class="col col-1" data-label="Email">
-                                <%= BID.email %>
+                                <%= BID.userInfo %>
                             </div>
                             <div class="col col-2" data-label="Bid">
                                 <%= BID.bid %>$</div>
@@ -1518,9 +1518,6 @@
             </header>
             <form action="/products/bidAdded/<%=singleRes._id%>" method="POST" class="form">
                 <div class="form__group">
-                    <input type="email" class="form__input" placeholder="Email" name="email" required="required" />
-                </div>
-                <div class="form__group">
                     <input type="number" class="form__input" placeholder="Bid" name="bid" required="required" />
                 </div>
                 <div class="form__group">
@@ -1547,9 +1544,6 @@
             </header>
             <form action="/products/commentsAdded/<%=singleRes._id%>" method="POST" class="form">
                 <div class="form__group">
-                    <input type="text" class="form__input" placeholder="Name" name="UserName" aria-label="Username" aria-describedby="basic-addon1" required="required" />
-                </div>
-                <div class="form__group">
                     <textarea name="Comments" class="form__input" id="" cols="200%" rows="2" placeholder="Your Comments!" required="required"></textarea>
                 </div>
                 <button class="form__button" type="submit">Add comments</button>
@@ -1572,7 +1566,7 @@
                   singleRes.comments.forEach(function(c) { %>
                         <li class="table-row">
                             <div class="col col-5" data-label="Email">
-                                <%= c.UserName %>
+                                <%= c.userInfo %>
                             </div>
                             <div class="col col-6" data-label="comment">
                                 <%=c.Comments%>

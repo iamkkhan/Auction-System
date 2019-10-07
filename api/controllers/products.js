@@ -65,7 +65,14 @@ exports.AddCommentsProduct = (req, res, next) => {
     // getting the id here
     let ID = req.params.productID;
 
-    Product.update({ _id: ID }, { $push: { comments: req.body } })
+    Product.update({ _id: ID }, {
+            $push: {
+                comments: {
+                    userInfo: req.user.name,
+                    Comments: req.body.Comments
+                }
+            }
+        })
         .exec()
         .then(AddComment => {
             res.redirect(`/products/${ID}`);
@@ -80,10 +87,11 @@ exports.addProducts = (req, res, next) => {
         price: req.body.Price,
         description: req.body.Description,
         productImage: req.file.filename,
-        Category: req.body.selectpicker
+        Category: req.body.selectpicker,
+        userInfo: req.user.name
     });
 
-    // saving into the DB here
+    // // saving into the DB here
     products
         .save()
         .then(result => {
@@ -214,7 +222,15 @@ exports.deleteProducts = (req, res, next) => {
 exports.adddingBid = (req, res, next) => {
     ID = req.params.productID;
 
-    Product.update({ _id: ID }, { $push: { bidDetails: req.body } })
+    Product.update({ _id: ID }, {
+            $push: {
+                bidDetails: {
+                    userInfo: req.user.name,
+                    bid: req.body.bid,
+                    bidnote: req.body.bidnote
+                }
+            }
+        })
         .exec()
         .then(updateBid => {
             res.redirect(`/products/${ID}`);
