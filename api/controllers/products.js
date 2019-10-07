@@ -88,7 +88,8 @@ exports.addProducts = (req, res, next) => {
         description: req.body.Description,
         productImage: req.file.filename,
         Category: req.body.selectpicker,
-        userInfo: req.user.name
+        userInfo: req.user.name,
+        postedBy: req.user.name
     });
 
     // // saving into the DB here
@@ -126,7 +127,7 @@ exports.getSingleProducts = (req, res, next) => {
 
     Product.findById(ID)
         .select(
-            "_id name price description productImage bidDetails comments Category date"
+            "_id name price description productImage bidDetails comments Category postedBy date"
         )
         .exec()
         .then(doc => {

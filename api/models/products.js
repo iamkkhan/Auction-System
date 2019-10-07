@@ -33,6 +33,9 @@ const productSchema = mongoose.Schema({
     comments: {
         type: Array
     },
+    postedBy: {
+        type: String
+    },
     date: {
         type: Date,
         default: Date.now

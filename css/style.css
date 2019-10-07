@@ -1004,7 +1004,7 @@ a {
     .outer-container {
         height: 80vh;
         margin: 20px 0 50px;
-    }    
+    }
     .forget-password {
         font-size: 12px;
         margin: -5px 0px 15px;
@@ -1405,6 +1405,9 @@ h2 small {
         flex-direction: row;
         justify-content: center;
         align-content: center;
+    }
+    .banner-content__title {
+        font-size: 35px !important;
     }
 }
 
