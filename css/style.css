@@ -1,9 +1,5 @@
 /* -------------------------------------------- basic csss -------------------------------- */
 
-.banner-content__title {
-    font-size: 100px !important;
-}
-
 * {
     box-sizing: border-box;
     margin: 0px;
@@ -548,7 +544,7 @@ button:focus {
         font-size: 20px;
     }
     .banner-content__title {
-        font-size: 12vw;
+        font-size: 15vw !important;
         margin: 12px;
     }
     .banner-content__intro {
@@ -726,7 +722,6 @@ button:focus {
     font-size: 15px;
     font-weight: bold;
     z-index: 30;
-    color: white !important;
 }
 
 .product-card:hover .product-card__label {
@@ -1006,6 +1001,10 @@ a {
 }
 
 @media (max-width: 650px) {
+    .outer-container {
+        height: 80vh;
+        margin: 20px 0 50px;
+    }    
     .forget-password {
         font-size: 12px;
         margin: -5px 0px 15px;
@@ -1411,8 +1410,8 @@ h2 small {
 
 @media all and (max-width: 800px) {
     .product-card {
-        height: 25vh;
-        width: 10wh;
+        height: 40vh;
+        width: 50vw;
     }
     .banner-content__button {
         font-size: 13px;
