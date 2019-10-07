@@ -5,12 +5,17 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
 const multer = require("multer");
+
 const expressLayouts = require("express-ejs-layouts");
 const app = express();
 
 // for the msg after the redirect store in sessions
 const flash = require("connect-flash");
 const session = require("express-session");
+cookieParser = require("cookie-parser");
+
+// using ths for the memory leak
+var MemoryStore = require("session-memory-store")(session);
 
 const passport = require("passport");
 
@@ -60,12 +65,15 @@ app.use(express.static(path.join(__dirname, "/uploads")));
 // handling the CORS CROSS ORIGIN Resource Sharing error here
 app.use(cors());
 
+app.use(cookieParser());
+
 // flash msgs here and express session here (Middleware)
 app.use(
     session({
         secret: "hello",
         resave: true,
-        saveUninitialized: true
+        saveUninitialized: true,
+        store: new MemoryStore(10)
     })
 );
 
@@ -90,21 +98,14 @@ app.use(bidRoutes);
 app.use(productRoutes);
 app.use(searchRoutes);
 
-
-
 // serving the css files static here
 app.use(express.static(path.join(__dirname, "css")));
-
-
 
 // serving the js files static here
 app.use(express.static(path.join(__dirname, "js")));
 
-
 // serving the images folder here
 app.use(express.static(path.join(__dirname, "img")));
-
-
 
 // setting up the error handling here
 app.use((req, res, next) => {
