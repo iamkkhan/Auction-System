@@ -125,10 +125,12 @@ app.use((err, req, res, next) => {
 
 // connecting the mongo to the application
 mongoose
-    .connect(process.env.MONGODB_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    })
+    .connect(
+        "mongodb+srv://SaifurRehman:project999@auction-system-db-9k5mh.mongodb.net/test?retryWrites=true&w=majority", {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        }
+    )
     .then(result => {
         console.log(`Connected Successfully to MongoDB!`);
         app.listen(process.env.PORT, () => {
